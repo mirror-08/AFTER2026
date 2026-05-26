@@ -185,7 +185,7 @@
   .role-section-title { font-size: 12px; font-weight: 700; color: var(--text3); padding: 6px 8px 2px; }
 
   /* HEATMAP */
-  .heatmap-scroll { overflow-x: auto; }
+  .heatmap-scroll { overflow-x: auto; text-align: center; }
   .heatmap-wrap { display: flex; gap: 4px; justify-content: center; padding: 8px 0; width: max-content; margin: 0 auto; }
   .seat-grid { display: flex; flex-direction: column; gap: 2px; }
   .seat-row { display: flex; gap: 1px; align-items: center; }
@@ -201,7 +201,7 @@
   .legend-dot { width: 14px; height: 14px; border-radius: 3px; }
 
   /* MINI SEAT */
-  .mini-seat-wrap { overflow-x: auto; margin: 8px 0; }
+  .mini-seat-wrap { overflow-x: auto; margin: 8px 0; text-align: center; }
 
   /* STATS MONEY BLUR */
   .money-blur-wrap { transition: filter 0.3s; }
@@ -1356,8 +1356,8 @@ function renderHome() {
         <div class="next-show-dday${diff===0?' today-dday':''}">${dday}${nextShow.isBooked===false ? ' <span style="font-size:14px;opacity:0.7;font-weight:400;">미정</span>' : ''}</div>
         <div class="next-show-date">${nextShow.date} (${dow[d.getDay()]}) ${nextShow.time}</div>
         <div class="next-show-casting">
-          <span class="next-show-pill mark">${nextShow.mark}</span>
-          <span class="next-show-pill louie">${nextShow.louie}</span>
+          <span class="next-show-pill mark"><span style="opacity:0.7;font-size:9px;margin-right:3px;">마크</span>${nextShow.mark}</span>
+          <span class="next-show-pill louie"><span style="opacity:0.7;font-size:9px;margin-right:3px;">루이</span>${nextShow.louie}</span>
         </div>
         ${seat ? `<div class="next-show-seat">${seat}</div>` : ''}
       </div>`;
