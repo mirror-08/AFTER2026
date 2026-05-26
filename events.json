@@ -1,1 +1,12 @@
-[]
+[
+  {"startDate":"2026-05-29","endDate":"2026-05-31","name":"웰컴팩 증정 데이","color":"#6B1520"},
+  {"startDate":"2026-06-01","endDate":"2026-06-04","name":"트리플 적립 데이","color":"#9B7045"},
+  {"startDate":"2026-06-05","endDate":"2026-06-07","name":"생존템 증정 데이","color":"#D9A0AC"},
+  {"startDate":"2026-06-08","endDate":"2026-06-11","name":"스페셜 어서 데이","color":"#222222"},
+  {"startDate":"2026-06-08","endDate":"2026-06-11","name":"미공개 이벤트 🔒","color":"#A03040"},
+  {"startDate":"2026-06-12","endDate":"2026-06-14","name":"의상 체인지","color":"#6B1520"},
+  {"startDate":"2026-06-13","endDate":"2026-06-14","name":"관객과의 대화","color":"#D9A0AC"},
+  {"startDate":"2026-06-15","endDate":"2026-06-18","name":"에필로그 & 프롤로그","color":"#9B7045"},
+  {"startDate":"2026-06-19","endDate":"2026-06-19","name":"럭키드로우","color":"#222222"},
+  {"startDate":"2026-06-20","endDate":"2026-06-21","name":"무대인사","color":"#C8102E"}
+]
