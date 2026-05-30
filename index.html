@@ -833,7 +833,7 @@
         <option value="polaroid">폴라로이드</option>
         <option value="couponpack40">[쿠폰팩] 40% 할인권</option>
         <option value="couponpackDouble">[쿠폰팩] 더블적립권</option>
-        <option value="couponpackPass">[쿠폰팩] 증빙 패스</option>
+        <option value="couponpackPass">[쿠폰팩] 증빙패스</option>
       </select>
     </div>
     <div class="form-group">
@@ -1437,7 +1437,7 @@ function renderHome() {
     { key:'polaroid',         label:'📸 폴라로이드',        cur:cPol,  final:fPol  },
     { key:'couponpack40',     label:'[쿠폰팩] 40% 할인권', cur:cCp40, final:fCp40 },
     { key:'couponpackDouble', label:'[쿠폰팩] 더블적립권', cur:cCpD,  final:fCpD  },
-    { key:'couponpackPass',   label:'[쿠폰팩] 증빙 패스',  cur:cCpP,  final:fCpP  }
+    { key:'couponpackPass',   label:'[쿠폰팩] 증빙패스',  cur:cCpP,  final:fCpP  }
   ];
   document.getElementById('home-coupons').innerHTML =
     `<div class="coupon-cards">${homeCouponItems.map(item => {
@@ -2397,7 +2397,7 @@ const COUPON_ITEMS = [
   { key:'polaroid',         label:'폴라로이드',           short:'📸'    },
   { key:'couponpack40',     label:'[쿠폰팩] 40% 할인권', short:'팩40%' },
   { key:'couponpackDouble', label:'[쿠폰팩] 더블적립권', short:'팩더블' },
-  { key:'couponpackPass',   label:'[쿠폰팩] 증빙 패스',  short:'팩패스' }
+  { key:'couponpackPass',   label:'[쿠폰팩] 증빙패스',  short:'팩패스' }
 ];
 
 // 쿠폰 잔여 계산 (extraCouponKey 지원)
