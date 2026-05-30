@@ -2227,6 +2227,17 @@ function updateStampSessionOptions() {
     }
   }
 
+  if (method === '더블 적립') {
+    const r2 = document.querySelector('input[name="stamp-qty"][value="2"]');
+    if (r2) { r2.checked = true; updateQtyLabel(); }
+  } else if (method === '트리플 적립') {
+    const r3 = document.querySelector('input[name="stamp-qty"][value="3"]');
+    if (r3) { r3.checked = true; updateQtyLabel(); }
+  } else {
+    const r1 = document.querySelector('input[name="stamp-qty"][value="1"]');
+    if (r1) { r1.checked = true; updateQtyLabel(); }
+  }
+
   if (!group || !container) return;
   if (!date) { group.style.display = 'none'; return; }
   const sessions = getSchedule().filter(s => s.date === date);
