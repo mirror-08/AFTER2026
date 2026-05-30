@@ -783,6 +783,7 @@
       <div style="display:flex;flex-direction:column;gap:8px;">
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="직접 관람" checked onchange="updateStampSessionOptions()"> 직접 관람</label>
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="더블 적립" onchange="updateStampSessionOptions()"> 더블 적립 <span style="font-size:11px;color:var(--text3);margin-left:4px;">(+2칸)</span></label>
+        <div id="stamp-double-warn" style="display:none;font-size:12px;color:var(--danger);padding:2px 0 0 26px;">⚠ 보유한 더블적립권이 없습니다</div>
         <label style="display:flex;align-items:center;gap:8px;font-size:14px;cursor:pointer;"><input type="radio" name="stamp-method" value="트리플 적립" onchange="updateStampSessionOptions()"> 트리플 적립 <span style="font-size:11px;color:var(--text3);margin-left:4px;">(+3칸)</span></label>
       </div>
     </div>
@@ -2215,6 +2216,17 @@ function updateStampSessionOptions() {
   const date      = document.getElementById('stamp-date')?.value;
   const group     = document.getElementById('stamp-session-group');
   const container = document.getElementById('stamp-session-options');
+
+  const doubleWarn = document.getElementById('stamp-double-warn');
+  if (doubleWarn) {
+    if (method === '더블 적립') {
+      const avail = calcCouponCount('couponpackDouble', getCoupons(), getStampBoards(), getRecords());
+      doubleWarn.style.display = avail <= 0 ? '' : 'none';
+    } else {
+      doubleWarn.style.display = 'none';
+    }
+  }
+
   if (!group || !container) return;
   if (!date) { group.style.display = 'none'; return; }
   const sessions = getSchedule().filter(s => s.date === date);
@@ -2289,6 +2301,13 @@ function addStamp() {
 
   const toastMsg = applyStampToBoard(boardId, qty, date, fullMethod, commentRaw);
   if (!toastMsg) return;
+
+  if (method === '더블 적립') {
+    const coupons = getCoupons();
+    coupons.couponpackDouble.history.push({ type: '사용', date, comment: '더블 적립 사용', qty: 1 });
+    saveCoupons(coupons);
+  }
+
   closePanel('overlay-add-stamp');
   showToast(toastMsg);
   renderStampBoards();
