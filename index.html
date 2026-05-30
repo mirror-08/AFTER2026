@@ -641,6 +641,7 @@
         <option value="3회차 적립 할인">3회차 적립 할인 (40%)</option>
         <option value="5회차 적립 할인">5회차 적립 할인 (50%)</option>
         <option value="복지할인">복지할인 (50%)</option>
+        <option value="쿠폰팩 할인">쿠폰팩 할인 (40%)</option>
       </select>
       <div id="rec-discount-warn" style="display:none;margin-top:6px;font-size:12px;color:var(--danger);">⚠ 현재 보유한 쿠폰이 없습니다</div>
     </div>
@@ -829,6 +830,9 @@
         <option value="discount40">40% 할인권</option>
         <option value="discount50">50% 할인권</option>
         <option value="polaroid">폴라로이드</option>
+        <option value="couponpack40">[쿠폰팩] 40% 할인권</option>
+        <option value="couponpackDouble">[쿠폰팩] 더블적립권</option>
+        <option value="couponpackPass">[쿠폰팩] 증빙 패스</option>
       </select>
     </div>
     <div class="form-group">
@@ -1411,16 +1415,25 @@ function renderHome() {
     }, 0);
     return cur + future;
   }
-  const c40  = calcCouponCount('discount40', coupons, boards, records, todayStr);
-  const c50  = calcCouponCount('discount50', coupons, boards, records, todayStr);
-  const cPol = calcCouponCount('polaroid',   coupons, boards, records, todayStr);
-  const f40  = homeCouponFinal('discount40');
-  const f50  = homeCouponFinal('discount50');
-  const fPol = homeCouponFinal('polaroid');
+  const c40   = calcCouponCount('discount40',       coupons, boards, records, todayStr);
+  const c50   = calcCouponCount('discount50',       coupons, boards, records, todayStr);
+  const cPol  = calcCouponCount('polaroid',         coupons, boards, records, todayStr);
+  const cCp40 = calcCouponCount('couponpack40',     coupons, boards, records, todayStr);
+  const cCpD  = calcCouponCount('couponpackDouble', coupons, boards, records, todayStr);
+  const cCpP  = calcCouponCount('couponpackPass',   coupons, boards, records, todayStr);
+  const f40   = homeCouponFinal('discount40');
+  const f50   = homeCouponFinal('discount50');
+  const fPol  = homeCouponFinal('polaroid');
+  const fCp40 = homeCouponFinal('couponpack40');
+  const fCpD  = homeCouponFinal('couponpackDouble');
+  const fCpP  = homeCouponFinal('couponpackPass');
   const homeCouponItems = [
-    { key:'discount40', label:'40% 할인권', cur:c40,  final:f40  },
-    { key:'discount50', label:'50% 할인권', cur:c50,  final:f50  },
-    { key:'polaroid',   label:'📸 폴라로이드', cur:cPol, final:fPol }
+    { key:'discount40',       label:'40% 할인권',          cur:c40,   final:f40   },
+    { key:'discount50',       label:'50% 할인권',          cur:c50,   final:f50   },
+    { key:'polaroid',         label:'📸 폴라로이드',        cur:cPol,  final:fPol  },
+    { key:'couponpack40',     label:'[쿠폰팩] 40% 할인권', cur:cCp40, final:fCp40 },
+    { key:'couponpackDouble', label:'[쿠폰팩] 더블적립권', cur:cCpD,  final:fCpD  },
+    { key:'couponpackPass',   label:'[쿠폰팩] 증빙 패스',  cur:cCpP,  final:fCpP  }
   ];
   document.getElementById('home-coupons').innerHTML =
     `<div class="coupon-cards">${homeCouponItems.map(item => {
@@ -2290,7 +2303,8 @@ function addStamp() {
 // 할인권종 → 쿠폰 키 매핑
 const DISCOUNT_COUPON_MAP = {
   '3회차 적립 할인': 'discount40',
-  '5회차 적립 할인': 'discount50'
+  '5회차 적립 할인': 'discount50',
+  '쿠폰팩 할인': 'couponpack40'
 };
 
 const DISCOUNT_LABEL = {
@@ -2305,7 +2319,8 @@ const DISCOUNT_LABEL = {
   '조기예매 할인':         '조기예매 할인 (30%)',
   '3회차 적립 할인':       '3회차 적립 할인 (40%)',
   '5회차 적립 할인':       '5회차 적립 할인 (50%)',
-  '복지할인':              '복지할인 (50%)'
+  '복지할인':              '복지할인 (50%)',
+  '쿠폰팩 할인':           '쿠폰팩 할인 (40%)'
 };
 
 function onDiscountTypeChange() {
@@ -2355,9 +2370,12 @@ function openAddStampBoardFromRecord() {
 let _couponHistoryKey = '';
 
 const COUPON_ITEMS = [
-  { key:'discount40', label:'40% 할인권', short:'40%' },
-  { key:'discount50', label:'50% 할인권', short:'50%' },
-  { key:'polaroid',   label:'폴라로이드',  short:'📸'  }
+  { key:'discount40',       label:'40% 할인권',          short:'40%'   },
+  { key:'discount50',       label:'50% 할인권',          short:'50%'   },
+  { key:'polaroid',         label:'폴라로이드',           short:'📸'    },
+  { key:'couponpack40',     label:'[쿠폰팩] 40% 할인권', short:'팩40%' },
+  { key:'couponpackDouble', label:'[쿠폰팩] 더블적립권', short:'팩더블' },
+  { key:'couponpackPass',   label:'[쿠폰팩] 증빙 패스',  short:'팩패스' }
 ];
 
 // 쿠폰 잔여 계산 (extraCouponKey 지원)
