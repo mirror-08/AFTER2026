@@ -913,9 +913,12 @@ function getStampBoards()   { return migrateStampBoards(DB.get('stamp_boards', [
 function saveStampBoards(s) { DB.set('stamp_boards', s); }
 function getCoupons() {
   const c = DB.get('coupons', {});
-  if (!c.discount40) c.discount40 = { count: 0, history: [] };
-  if (!c.discount50) c.discount50 = { count: 0, history: [] };
-  if (!c.polaroid)   c.polaroid   = { count: 0, history: [] };
+  if (!c.discount40)       c.discount40       = { count: 0, history: [] };
+  if (!c.discount50)       c.discount50       = { count: 0, history: [] };
+  if (!c.polaroid)         c.polaroid         = { count: 0, history: [] };
+  if (!c.couponpack40)     c.couponpack40     = { count: 0, history: [] };
+  if (!c.couponpackDouble) c.couponpackDouble = { count: 0, history: [] };
+  if (!c.couponpackPass)   c.couponpackPass   = { count: 0, history: [] };
   return c;
 }
 function saveCoupons(c) { DB.set('coupons', c); }
